@@ -84,9 +84,9 @@ class MainWindow(QtWidgets.QMainWindow):
         form.addRow("Окно FFT:", self.fft_size_combo)
 
         # окно
-        self.window_combo = QtWidgets.QComboBox()
-        self.window_combo.addItems(["hann", "hamming", "blackman", "rect"])
-        form.addRow("Оконная функция:", self.window_combo)
+        #self.window_combo = QtWidgets.QComboBox()
+        #self.window_combo.addItems(["hann", "hamming", "blackman", "rect"])
+        #form.addRow("Оконная функция:", self.window_combo)
 
         # окно времени
         self.time_window_spin = QtWidgets.QDoubleSpinBox()
@@ -230,7 +230,7 @@ class MainWindow(QtWidgets.QMainWindow):
         n_fft = int(self.fft_size_combo.currentData())
         if self.buffer.count >= n_fft:
             sv = self.buffer.last(n_fft)
-            f, mag = compute_spectrum(sv, fs, self.window_combo.currentText())
+            f, mag = compute_spectrum(sv, fs, window="hann")
             self.freq_curve.setData(f, mag)
             if self.autoscale_check.isChecked():
                 self.freq_plot.enableAutoRange()
